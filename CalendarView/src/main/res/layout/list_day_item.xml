@@ -31,9 +31,8 @@
                 android:gravity="left|top"
                 android:text="00:00"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </RelativeLayout>
-
 
         <TextView
             android:id="@+id/dayNote"

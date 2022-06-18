@@ -16,11 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.MyViewHolder> {
     private ArrayList<CalendarDayModel> list;
     private Context mCtx;
     private CalendarDayView.OnCalendarListener onCalendarListener;
+
+    private CalendarDayModel selectDayModel = new CalendarDayModel(0);
 
     public void setOnCalendarListener(CalendarDayView.OnCalendarListener onCalendarListener) {
         this.onCalendarListener = onCalendarListener;
@@ -83,13 +86,19 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
             holder.parentDay.setBackgroundResource(R.color.grey);
             holder.dayBorder.setBackgroundResource(R.color.black2);
         } else if (model.getStatus() == 2) {
-            holder.date.setTextColor(mCtx.getColor(R.color.textColorLight));
-            holder.day.setTextColor(mCtx.getColor(R.color.textColorLight));
-            holder.parent.setBackgroundResource(R.drawable.color_status_2);
-            holder.parentDay.setBackgroundResource(R.drawable.color_status_2);
-            holder.dayBorder.setBackgroundResource(R.drawable.color_status_2);
-            if (!model.isStart()) {
-                holder.date.setText("");
+            holder.date.setTextColor(mCtx.getColor(R.color.textColorLight2));
+            holder.day.setTextColor(mCtx.getColor(R.color.textColorLight2));
+            if (model.isCurrentDate()) {
+                holder.parent.setBackgroundResource(R.drawable.color_status_2);
+                holder.parentDay.setBackgroundResource(R.drawable.color_status_1);
+                holder.dayBorder.setBackgroundResource(R.drawable.color_status_2);
+            } else {
+                holder.parent.setBackgroundResource(R.drawable.color_status_2);
+                holder.parentDay.setBackgroundResource(R.drawable.color_status_2);
+                holder.dayBorder.setBackgroundResource(R.drawable.color_status_2);
+                if (!model.isStart()) {
+                    holder.date.setText("");
+                }
             }
         } else {
             holder.date.setTextColor(mCtx.getColor(R.color.textColorLight));
@@ -99,10 +108,25 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
             holder.dayBorder.setBackgroundResource(R.color.black2);
         }
 
+        if (model == selectDayModel) {
+            holder.parent.setBackgroundResource(R.drawable.color_select);
+            holder.parentDay.setBackgroundResource(R.drawable.color_select);
+        }
+
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCalendarListener.onDateSelected(sdf1.format(model.getTimeinmilli()));
+                if (selectDayModel == model) {
+                    selectDayModel = new CalendarDayModel(0);
+                } else {
+                    selectDayModel = model;
+                    DayItem dayItem = model.getDayItem();
+                    if (dayItem.date == null) {
+                        dayItem.date = new Date(model.timeinmilli);
+                    }
+                    onCalendarListener.onDateSelected(dayItem);
+                }
+                notifyDataSetChanged();
             }
         });
     }

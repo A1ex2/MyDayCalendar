@@ -26,7 +26,7 @@ public class CalendarDayView extends LinearLayout {
     RecyclerView recyclerView;
 
     public interface OnCalendarListener {
-        void onDateSelected(String date);
+        void onDateSelected(DayItem dayItem);
     }
 
     public CalendarDayView(Context context, @Nullable AttributeSet attrs) {
@@ -104,17 +104,19 @@ public class CalendarDayView extends LinearLayout {
             long t2 = c2.getTimeInMillis();
 
             CalendarDayModel model = new CalendarDayModel(c1.getTimeInMillis());
-            if (t1 <= today & t2 > today) {
+            if (t1 <= today && t2 > today) {
                 pos = id;
                 model.setStatus(1);
+                model.setCurrentDate(true);
             }
 
             model.setText("");
             model.setStart(false);
             for (int j = 0; j < dayItems.size(); j++) {
                 DayItem dayItem = dayItems.get(j);
-                if (dayItem.date.getTime() <= t1 & dayItem.dateEnd.getTime() > t1) {
-                    if (dayItem.start){
+                if (dayItem.date.getTime() <= t1 && dayItem.dateEnd.getTime() > t1
+                        || t1 <= dayItem.date.getTime() && t2 > dayItem.date.getTime()) {
+                    if (dayItem.start) {
                         model.setText(dayItem.text);
                         model.setStart(true);
                         dayItem.start = false;
@@ -122,6 +124,7 @@ public class CalendarDayView extends LinearLayout {
                         model.setText("");
                     }
                     model.setStatus(2);
+                    model.setDayItem(dayItem);
                     break;
                 }
             }
