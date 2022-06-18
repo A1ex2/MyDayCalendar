@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
             Date newdate3 = dateformat.parse(strdate3);
             Date newdate4 = dateformat.parse(strdate4);
 
-            dateItems.add(new DayItem(newdate, 20, "Заметка 1", ""));
-            dateItems.add(new DayItem(newdate2, 60, "Заметка 2", ""));
-            dateItems.add(new DayItem(newdate3, 90, "Заметка 3", ""));
-            dateItems.add(new DayItem(newdate4, 90, "Заметка 4", ""));
+            dateItems.add(new DayItem(newdate, 20, "Заметка 1", 0));
+            dateItems.add(new DayItem(newdate2, 60, "Заметка 2", 0));
+            dateItems.add(new DayItem(newdate3, 90, "Заметка 3", 0));
+            dateItems.add(new DayItem(newdate4, 90, "Заметка 4", 0));
         } catch (ParseException e) {
             e.printStackTrace();
         }

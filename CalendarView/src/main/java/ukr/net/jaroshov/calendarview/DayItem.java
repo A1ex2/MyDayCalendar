@@ -8,10 +8,10 @@ public class DayItem {
     public Date dateEnd;
     public int durationMin = 0;
     public String text = "";
-    public String id = "";
+    public int id = 0;
     public boolean start = true;
 
-    public DayItem(Date date, int durationMin, String text, String id) {
+    public DayItem(Date date, int durationMin, String text, int id) {
         this.date = date;
         this.durationMin = durationMin;
         this.text = text;

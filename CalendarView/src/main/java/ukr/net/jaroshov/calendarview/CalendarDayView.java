@@ -88,6 +88,7 @@ public class CalendarDayView extends LinearLayout {
         int i = 0;
         int pos = 0;
         int id = 0;
+        int firstRecording = 0;
         while (current <= end) {
 
             Calendar c1 = Calendar.getInstance();
@@ -113,6 +114,10 @@ public class CalendarDayView extends LinearLayout {
             model.setText("");
             model.setStart(false);
             for (int j = 0; j < dayItems.size(); j++) {
+                if (firstRecording == 0 ){
+                    firstRecording = id;
+                }
+
                 DayItem dayItem = dayItems.get(j);
                 if (dayItem.date.getTime() <= t1 && dayItem.dateEnd.getTime() > t1
                         || t1 <= dayItem.date.getTime() && t2 > dayItem.date.getTime()) {
@@ -148,7 +153,11 @@ public class CalendarDayView extends LinearLayout {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        recyclerView.scrollToPosition(pos);
+        if (pos==0){
+            recyclerView.scrollToPosition(firstRecording);
+        } else {
+            recyclerView.scrollToPosition(pos);
+        }
     }
 
     public static Date getStartOfDay(Date date) {
