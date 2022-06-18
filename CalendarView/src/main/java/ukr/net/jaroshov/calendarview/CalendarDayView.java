@@ -114,9 +114,6 @@ public class CalendarDayView extends LinearLayout {
             model.setText("");
             model.setStart(false);
             for (int j = 0; j < dayItems.size(); j++) {
-                if (firstRecording == 0 ){
-                    firstRecording = id;
-                }
 
                 DayItem dayItem = dayItems.get(j);
                 if (dayItem.date.getTime() <= t1 && dayItem.dateEnd.getTime() > t1
@@ -130,6 +127,9 @@ public class CalendarDayView extends LinearLayout {
                     }
                     model.setStatus(2);
                     model.setDayItem(dayItem);
+                    if (firstRecording == 0) {
+                        firstRecording = id;
+                    }
                     break;
                 }
             }
@@ -153,7 +153,7 @@ public class CalendarDayView extends LinearLayout {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        if (pos==0){
+        if (pos == 0) {
             recyclerView.scrollToPosition(firstRecording);
         } else {
             recyclerView.scrollToPosition(pos);
