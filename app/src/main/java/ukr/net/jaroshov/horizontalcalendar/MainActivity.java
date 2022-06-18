@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import ukr.net.jaroshov.calendarview.CalendarDayView;
+import ukr.net.jaroshov.calendarview.DayItem;
 import ukr.net.jaroshov.calendarview.Tools;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,42 +25,33 @@ public class MainActivity extends AppCompatActivity {
 
         CalendarDayView calendarView = findViewById(R.id.calendar);
 
-        Calendar starttime = Calendar.getInstance();
-        starttime.setTime(getStartOfDay(starttime.getTime()));
+        Date date = new Date();
 
-        Calendar endtime = Calendar.getInstance();
-        endtime.setTime(getEndOfDay(endtime.getTime()));
+        ArrayList<DayItem> dateItems = new ArrayList();
 
-        ArrayList datesToBeColored = new ArrayList();
-        datesToBeColored.add(Tools.getFormattedDateToday());
+        try {
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-        calendarView.setUpCalendar(starttime.getTimeInMillis(), endtime.getTimeInMillis(), datesToBeColored, new CalendarDayView.OnCalendarListener() {
+            String strdate = "18-6-2022 08:00";
+            String strdate2 = "18-6-2022 15:00";
+            String strdate3 = "18-6-2022 18:30";
+
+            Date newdate = dateformat.parse(strdate);
+            Date newdate2 = dateformat.parse(strdate2);
+            Date newdate3 = dateformat.parse(strdate3);
+
+            dateItems.add(new DayItem(newdate, 30, "Заметка 1"));
+            dateItems.add(new DayItem(newdate2, 60, "Заметка 2"));
+            dateItems.add(new DayItem(newdate3, 90, "Заметка 3"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        calendarView.setUpCalendar(date, dateItems, 15, new CalendarDayView.OnCalendarListener() {
             @Override
             public void onDateSelected(String date) {
                 Toast.makeText(MainActivity.this, date + " clicked!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public static Date getStartOfDay(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-
-        return cal.getTime();
-    }
-
-    public static Date getEndOfDay(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 59);
-        cal.set(Calendar.SECOND, 59);
-        cal.set(Calendar.MILLISECOND, 59);
-
-        return cal.getTime();
     }
 }

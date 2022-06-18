@@ -36,6 +36,7 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
         TextView date, month, day;
         LinearLayout parent;
         RelativeLayout parentDay;
+        View dayBorder;
 
         public MyViewHolder(View view) {
             super(view);
@@ -45,6 +46,7 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
             day = view.findViewById(R.id.dayNote);
 
             parentDay = view.findViewById(R.id.parentDay);
+            dayBorder = view.findViewById(R.id.day_border);
         }
     }
 
@@ -72,23 +74,29 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
         final SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 
         holder.date.setText(sdf.format(model.getTimeinmilli()).split(" ")[0]);
-        holder.day.setText("");
+        holder.day.setText(model.getText());
 
         if (model.getStatus() == 0) {
             holder.date.setTextColor(mCtx.getColor(R.color.grey_600));
-//            holder.month.setTextColor(mCtx.getColor(R.color.grey_600));
             holder.day.setTextColor(mCtx.getColor(R.color.grey_600));
             holder.parent.setBackgroundColor(Color.WHITE);
-
             holder.parentDay.setBackgroundResource(R.color.grey);
-        } else {
-            holder.day.setText("Текущая дата");
-
+            holder.dayBorder.setBackgroundResource(R.color.black2);
+        } else if (model.getStatus() == 2) {
             holder.date.setTextColor(mCtx.getColor(R.color.textColorLight));
-//            holder.month.setTextColor(mCtx.getColor(R.color.textColorLight));
+            holder.day.setTextColor(mCtx.getColor(R.color.textColorLight));
+            holder.parent.setBackgroundResource(R.drawable.color_status_2);
+            holder.parentDay.setBackgroundResource(R.drawable.color_status_2);
+            holder.dayBorder.setBackgroundResource(R.drawable.color_status_2);
+            if (!model.isStart()) {
+                holder.date.setText("");
+            }
+        } else {
+            holder.date.setTextColor(mCtx.getColor(R.color.textColorLight));
             holder.day.setTextColor(mCtx.getColor(R.color.textColorLight));
             holder.parent.setBackgroundResource(R.drawable.color_status_1);
             holder.parentDay.setBackgroundResource(R.drawable.color_status_1);
+            holder.dayBorder.setBackgroundResource(R.color.black2);
         }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {

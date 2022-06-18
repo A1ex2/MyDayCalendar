@@ -68,7 +68,14 @@ public class CalendarDayView extends LinearLayout {
         addView(view);
     }
 
-    public void setUpCalendar(long start, long end, ArrayList<String> dates, OnCalendarListener onCalendarListener) {
+    public void setUpCalendar(Date date, ArrayList<DayItem> dayItems, int gradation, OnCalendarListener onCalendarListener) {
+        Calendar startTime = Calendar.getInstance();
+        startTime.setTime(getStartOfDay(date));
+        long start = startTime.getTimeInMillis();
+
+        Calendar endTime = Calendar.getInstance();
+        endTime.setTime(getEndOfDay(date));
+        long end = endTime.getTimeInMillis();
 
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(start);
@@ -93,19 +100,36 @@ public class CalendarDayView extends LinearLayout {
 
             Calendar c2 = Calendar.getInstance();
             c2.setTimeInMillis(t1);
-            c2.add(Calendar.MINUTE, 30);
+            c2.add(Calendar.MINUTE, gradation);
             long t2 = c2.getTimeInMillis();
 
             CalendarDayModel model = new CalendarDayModel(c1.getTimeInMillis());
-            if (t1 <= today & t2 >= today) {
+            if (t1 <= today & t2 > today) {
                 pos = id;
                 model.setStatus(1);
+            }
+
+            model.setText("");
+            model.setStart(false);
+            for (int j = 0; j < dayItems.size(); j++) {
+                DayItem dayItem = dayItems.get(j);
+                if (dayItem.date.getTime() <= t1 & dayItem.dateEnd.getTime() > t1) {
+                    if (dayItem.start){
+                        model.setText(dayItem.text);
+                        model.setStart(true);
+                        dayItem.start = false;
+                    } else {
+                        model.setText("");
+                    }
+                    model.setStatus(2);
+                    break;
+                }
             }
 
             list.add(model);
 
             current = c1.getTimeInMillis();
-            i += 30;
+            i += gradation;
             id++;
             Log.d("Setting data", sdf.format(c1.getTimeInMillis()));
         }
@@ -122,5 +146,27 @@ public class CalendarDayView extends LinearLayout {
         adapter.notifyDataSetChanged();
 
         recyclerView.scrollToPosition(pos);
+    }
+
+    public static Date getStartOfDay(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        return cal.getTime();
+    }
+
+    public static Date getEndOfDay(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 59);
+
+        return cal.getTime();
     }
 }
