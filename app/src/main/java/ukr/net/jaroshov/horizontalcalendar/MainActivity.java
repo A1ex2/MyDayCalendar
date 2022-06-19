@@ -31,30 +31,30 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<DayItem> dateItems = new ArrayList();
 
         try {
-            SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-            String strdate = "18-6-2022 08:00";
-            String strdate2 = "18-6-2022 15:06";
-            String strdate3 = "18-6-2022 18:30";
-            String strdate4 = "18-6-2022 09:24";
+            String strdate = "19-6-2022 08:00:00";
+            String strdate2 = "19-6-2022 15:06:00";
+            String strdate3 = "19-6-2022 18:30:00";
+            String strdate4 = "19-6-2022 09:00:01";
 
             Date newdate = dateformat.parse(strdate);
             Date newdate2 = dateformat.parse(strdate2);
             Date newdate3 = dateformat.parse(strdate3);
             Date newdate4 = dateformat.parse(strdate4);
 
-            dateItems.add(new DayItem(newdate, 20, "Заметка 1", 0));
-            dateItems.add(new DayItem(newdate2, 60, "Заметка 2", 0));
-            dateItems.add(new DayItem(newdate3, 90, "Заметка 3", 0));
-            dateItems.add(new DayItem(newdate4, 90, "Заметка 4", 0));
+//            dateItems.add(new DayItem(newdate, 20, "Заметка 1", 0));
+//            dateItems.add(new DayItem(newdate2, 60, "Заметка 2", 0));
+//            dateItems.add(new DayItem(newdate3, 90, "Заметка 3", 0));
+            dateItems.add(new DayItem(newdate4, 30, "Заметка 4", 0));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         calendarView.setUpCalendar(date, dateItems, 15, new CalendarDayView.OnCalendarListener() {
             @Override
-            public void onDateSelected(DayItem dayItem) {
-                Toast.makeText(MainActivity.this, dayItem.date.toString(), Toast.LENGTH_SHORT).show();
+            public void onDateSelected(CalendarDayModel model) {
+                Toast.makeText(MainActivity.this, model.getDayItem().date.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

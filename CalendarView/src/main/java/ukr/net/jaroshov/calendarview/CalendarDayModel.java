@@ -1,12 +1,12 @@
 package ukr.net.jaroshov.calendarview;
 
 public class CalendarDayModel {
-    long timeinmilli;
-    int status = 0; //0->no color, 1->green, 2-> yellow
-    boolean start = false;
-    boolean currentDate = false;
-    String text;
-    DayItem dayItem = new DayItem();
+    public long timeinmilli;
+    public int status = 0; //0->no color, 1->green, 2-> yellow
+    public boolean start = false;
+    public boolean currentDate = false;
+    public String text;
+    public DayItem dayItem = new DayItem();
 
     public boolean isCurrentDate() {
         return currentDate;

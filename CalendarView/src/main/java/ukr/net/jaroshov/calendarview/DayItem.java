@@ -28,6 +28,8 @@ public class DayItem {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(date.getTime());
         c.add(Calendar.MINUTE, durationMin);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
         return c.getTime();
     }
 }

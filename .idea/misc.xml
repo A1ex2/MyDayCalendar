@@ -11,12 +11,16 @@
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/CalendarView/src/main/res/layout/horizontal_calendar_list_item.xml" value="0.44947916666666665" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/CalendarView/src/main/res/layout/list_day.xml" value="0.25" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/CalendarView/src/main/res/layout/list_day_item.xml" value="0.25" />
+        <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/CalendarView/src/main/res/layout/list_day_item_new.xml" value="0.25" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/CalendarView/src/main/res/layout/list_minute.xml" value="0.25" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/CalendarView/src/main/res/layout/verticalweekcalendar_day.xml" value="0.33" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/CalendarView/src/main/res/layout/verticalweekcalendar_week.xml" value="0.44947916666666665" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/app/src/main/res/layout/activity_main_2.xml" value="0.25" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/app/src/main/res/layout/list_day.xml" value="0.25" />
+        <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/app/src/main/res/layout/list_day_del.xml" value="0.25" />
         <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/app/src/main/res/layout/list_day_item.xml" value="0.25" />
+        <entry key="..\:/Users/A1ex/AndroidStudioProjects/HorizontalCalendar/app/src/main/res/layout/list_week.xml" value="0.25" />
       </map>
     </option>
   </component>

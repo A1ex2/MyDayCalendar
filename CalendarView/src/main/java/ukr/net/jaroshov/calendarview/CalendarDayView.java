@@ -26,7 +26,7 @@ public class CalendarDayView extends LinearLayout {
     RecyclerView recyclerView;
 
     public interface OnCalendarListener {
-        void onDateSelected(DayItem dayItem);
+        void onDateSelected(CalendarDayModel dayItemModel);
     }
 
     public CalendarDayView(Context context, @Nullable AttributeSet attrs) {

@@ -124,7 +124,7 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
                     if (dayItem.date == null) {
                         dayItem.date = new Date(model.timeinmilli);
                     }
-                    onCalendarListener.onDateSelected(dayItem);
+                    onCalendarListener.onDateSelected(model);
                 }
                 notifyDataSetChanged();
             }
