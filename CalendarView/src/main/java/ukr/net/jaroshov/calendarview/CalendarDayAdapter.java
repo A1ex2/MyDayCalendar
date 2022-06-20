@@ -40,6 +40,7 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
         LinearLayout parent;
         RelativeLayout parentDay;
         View dayBorder;
+        View dayTop;
 
         public MyViewHolder(View view) {
             super(view);
@@ -50,6 +51,7 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
 
             parentDay = view.findViewById(R.id.parentDay);
             dayBorder = view.findViewById(R.id.day_border);
+            dayTop = view.findViewById(R.id.day_top);
         }
     }
 
@@ -78,6 +80,7 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
 
         holder.date.setText(sdf.format(model.getTimeinmilli()).split(" ")[0]);
         holder.day.setText(model.getText());
+        holder.dayTop.setVisibility(View.INVISIBLE);
 
         if (model.getStatus() == 0) {
             holder.date.setTextColor(mCtx.getColor(R.color.grey_600));
@@ -98,6 +101,9 @@ public class CalendarDayAdapter extends RecyclerView.Adapter<CalendarDayAdapter.
                 holder.dayBorder.setBackgroundResource(R.drawable.color_status_2);
                 if (!model.isStart()) {
                     holder.date.setText("");
+                } else {
+                    holder.dayTop.setVisibility(View.VISIBLE);
+                    holder.dayTop.setBackgroundResource(R.color.black2);
                 }
             }
         } else {
